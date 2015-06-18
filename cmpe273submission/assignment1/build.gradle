@@ -1,0 +1,63 @@
+buildscript {
+    repositories {
+        maven { url "https://repo.spring.io/libs-release" }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.1.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'myvote'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://repo.spring.io/libs-release" }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    testCompile("junit:junit")
+
+    compile("org.codehaus.jackson:jackson-mapper-lgpl:1.9.13")
+}
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compile 'com.google.api-client:google-api-client:1.18.0-rc'
+}
+
+List compileLibraries =['com.sun.jersey:jersey-server:1.14',
+                        'com.sun.jersey:jersey-grizzly2:1.14',
+                        'com.sun.jersey:jersey-core:1.14',
+                        'javax.ws.rs:jsr311-api:1.1.1']
+
+
+dependencies {
+    compile (compileLibraries )
+
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+dependencies{
+    compile 'org.apache.bval:bval-guice:0.5'
+    compile 'javax.validation:validation-api:1.1.0.Final'
+
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.11'
+}
